@@ -4,7 +4,8 @@ angular.module('app').controller('chartController', function($scope, chartServic
   //set default chart options
   $scope.options ={
     legend: {
-      display: true
+      display: true,
+      labelString: 'all'
     },
     elements: {
       line: {
@@ -30,6 +31,7 @@ angular.module('app').controller('chartController', function($scope, chartServic
   }
   //set default parameters for API query
   $scope.params = {
+    filter: 'all',
     direction: 'asc',
     sort: 'updated',
     per_page: 100,
