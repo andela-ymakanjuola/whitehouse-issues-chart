@@ -1,0 +1,18 @@
+{
+  "name": "whitehouse-issues-chart",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "andela-ymakanjuola <yinka.makanjuola@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/andela-ymakanjuola/whitehouse-issues-chart",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ]
+}
