@@ -1,22 +1,20 @@
 angular.module('app').controller('chartController', function($scope, chartService) {
   $scope.data = [];
   $scope.labels = [];
-  $scope.params = {};
-  $scope.state_options = ['all', 'open', 'closed'];
-
-
-
-  $scope.plotChart = function() {
-    var chart_data = chartService.getChartData($scope.params)
-    $scope.data = chart_data.data
-    $scope.labels = chart_data.labels
-  }
-
+  //set default chart options
   $scope.options ={
+    legend: {
+      display: true
+    },
+    elements: {
+      line: {
+        fill: false,
+        tension: 0
+      }
+    },
     scales: {
       xAxes: [{
         type: 'time',
-        round: 'month',
         time: {
           unit: 'month'
         }
@@ -30,4 +28,22 @@ angular.module('app').controller('chartController', function($scope, chartServic
       }]
     }
   }
+  //set default parameters for API query
+  $scope.params = {
+    direction: 'asc',
+    sort: 'updated',
+    per_page: 100,
+    state: 'all'
+  };
+
+  $scope.state_options = ['all', 'open', 'closed'];
+
+  $scope.plotChart = function() {
+    var chart_data = chartService.getChartData($scope.params)
+
+    //set data to be plotted on the chart
+    $scope.data = chart_data.data
+    $scope.labels = chart_data.labels
+  }
+
 })
