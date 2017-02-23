@@ -6,15 +6,16 @@
 <body>
   <div ng-controller="chartController">
     <div>
+      Enter the details for the Issues you want to plot.
       <form ng-submit="plotChart()">
         <p>
-          Since: <input type="date" ng-model="params.since">
+          From: <input type="date" ng-model="params.since"> to present
         </p>
         <p>
           Labels: <input type="text" ng-model="params.label">
         </p>
         <p>
-          State: <select ng-options="state.toUpperCase() for state in state_options" ng-model="params.state"></select>
+          Issue Status: <select ng-options="state.toUpperCase() for state in state_options" ng-model="params.state"></select>
         </p>
         <input type="submit" value="PLOT">
       </form>
