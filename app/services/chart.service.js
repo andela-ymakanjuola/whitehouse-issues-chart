@@ -24,7 +24,7 @@ angular.module('app').factory('chartService', function($http) {
 
   return {
     getIssues: function(params) {
-      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues?per_page=100', {params: params})
+      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params})
     },
     getChartData: function(params) {
       var data = [];
@@ -38,9 +38,8 @@ angular.module('app').factory('chartService', function($http) {
           data.push(value);
           labels.push(new Date(key));
         })
-        console.log(data)
       }).catch(function(error) {
-        console.throw('error getting data', error);
+        console.error('error getting data', error);
       })
       return {data: data, labels: labels}
     }
