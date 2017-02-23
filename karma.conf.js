@@ -10,16 +10,19 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'sinon'],
 
 
     // list of files / patterns to load in the browser
     files: [
       'vendor/angular/angular.js',
+      'vendor/angular-resource/angular-resource.js',
       'vendor/angular-mocks/angular-mocks.js',
-      'vendor/angular-resources/angular-resources.js',
+      'node_modules/moment/moment.js',
+      'node_modules/chart.js/dist/Chart.js',
+      'node_modules/angular-chart.js/dist/angular-chart.js',
       'app/**/*.js',
-      'tests/**/*.js'
+      'tests/**/*.spec.js'
     ],
 
 
