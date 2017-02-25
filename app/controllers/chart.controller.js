@@ -2,6 +2,7 @@ angular.module('app').controller('chartController', function($scope, chartServic
   $scope.data = [];
   $scope.labels = [];
   $scope.series = [];
+  $scope.colors = ['#7986CB'];
   //set default chart options
   $scope.options ={
     legend: {
