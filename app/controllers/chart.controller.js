@@ -1,6 +1,7 @@
 angular.module('app').controller('chartController', function($scope, chartService) {
   $scope.data = [];
   $scope.labels = [];
+  $scope.series = [];
   //set default chart options
   $scope.options ={
     legend: {
@@ -44,7 +45,12 @@ angular.module('app').controller('chartController', function($scope, chartServic
     var chart_data = chartService.getChartData($scope.params)
 
     //set data to be plotted on the chart
-    $scope.data = chart_data.data
+    $scope.series.pop()
+    $scope.series.push($scope.params.state.toUpperCase())
+
+    $scope.data.pop()
+    $scope.data.push(chart_data.data)
+
     $scope.labels = chart_data.labels
   }
 
