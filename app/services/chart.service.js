@@ -10,7 +10,7 @@ angular.module('app').factory('chartService', function($http) {
   }
 
   function getNumberOfIssuesPerMonth(issues) {
-    var issues_per_date = {}
+    var issues_per_date = {};
     issues.forEach(function(issue) {
       if(issue in issues_per_date) {
         issues_per_date[issue] += 1;
@@ -19,7 +19,7 @@ angular.module('app').factory('chartService', function($http) {
       }
     })
 
-    return issues_per_date
+    return issues_per_date;
   }
 
   return {
@@ -31,7 +31,7 @@ angular.module('app').factory('chartService', function($http) {
       var labels = [];
 
       this.getIssues(params).then(function(res) {
-        var issues = getIssuesDates(res.data)
+        var issues = getIssuesDates(res.data);
         var issues_per_month = getNumberOfIssuesPerMonth(issues)
 
         angular.forEach(issues_per_month, function(value, key) {
@@ -41,8 +41,8 @@ angular.module('app').factory('chartService', function($http) {
       }).catch(function(error) {
         console.error('error getting data', error);
       })
-      return {data: data, labels: labels}
+      return {data: data, labels: labels};
     }
   }
 
-})
+});
