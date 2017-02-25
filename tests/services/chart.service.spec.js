@@ -12,7 +12,7 @@ describe('chartService', function() {
   }));
 
   afterEach(function() {
-     $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
   });
 
