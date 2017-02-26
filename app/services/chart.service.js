@@ -26,6 +26,18 @@ angular.module('app').factory('chartService', function($http) {
     getIssues: function(params) {
       return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params})
     },
+    getIssueLabels: function(params) {
+      var labels = [];
+      $http.get('https://api.github.com/repos/WhiteHouse/petitions/labels').then(function(res) {
+        res.data.forEach(function(label) {
+          labels.push(label.name);
+        });
+      }).catch(function(error) {
+        console.error('error getting issue labels', error);
+      });
+
+      return labels;
+    },
     getChartData: function(params) {
       var data = [];
       var labels = [];

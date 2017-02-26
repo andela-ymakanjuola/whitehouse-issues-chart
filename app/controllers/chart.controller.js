@@ -39,6 +39,7 @@ angular.module('app').controller('chartController', function($scope, chartServic
   };
 
   $scope.state_options = ['all', 'open', 'closed'];
+  $scope.label_options = chartService.getIssueLabels();
 
   $scope.plotChart = function() {
     var chart_data = chartService.getChartData($scope.params)

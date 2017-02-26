@@ -19,13 +19,12 @@
           <input class="mdl-textfield__input" type="date" ng-model="params.since">
         </p>
         <p>
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" ng-model="params.label">
-            <label class="mdl-textfield__label">Enter a comma separeted list of labels</label>
-          </div>
+          <select class="mdl-textfield__input" ng-options="label.toUpperCase() for label in label_options" ng-model="params.labels">
+            <option value="">Select Issue Label</option>
+          </select>
         </p>
         <p>
-          Select Issue status
+          Select Issue Status
           <select class="mdl-textfield__input" ng-options="state.toUpperCase() for state in state_options" ng-model="params.state"></select>
         </p>
         <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" value="PLOT">
