@@ -6,7 +6,7 @@ angular.module('app').factory('chartService', function($http) {
       issue_dates.push(moment(issue['updated_at']).format('MMM YYYY'))
     })
 
-    return issue_dates
+    return issue_dates;
   }
 
   function getNumberOfIssuesPerMonth(issues) {
@@ -24,7 +24,7 @@ angular.module('app').factory('chartService', function($http) {
 
   return {
     getIssues: function(params) {
-      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params})
+      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params});
     },
     getChartData: function(params) {
       var data = [];
@@ -32,7 +32,7 @@ angular.module('app').factory('chartService', function($http) {
 
       this.getIssues(params).then(function(res) {
         var issues = getIssuesDates(res.data);
-        var issues_per_month = getNumberOfIssuesPerMonth(issues)
+        var issues_per_month = getNumberOfIssuesPerMonth(issues);
 
         angular.forEach(issues_per_month, function(value, key) {
           data.push(value);
