@@ -1,11 +1,12 @@
 angular.module('app').controller('chartController', function($scope, chartService) {
   $scope.data = [];
   $scope.labels = [];
+  $scope.series = [];
+  $scope.colors = ['#7986CB'];
   //set default chart options
-  $scope.options ={
+  $scope.options = {
     legend: {
-      display: true,
-      labelString: 'all'
+      display: true
     },
     elements: {
       line: {
@@ -28,7 +29,7 @@ angular.module('app').controller('chartController', function($scope, chartServic
         }
       }]
     }
-  }
+  };
   //set default parameters for API query
   $scope.params = {
     filter: 'all',
@@ -45,8 +46,13 @@ angular.module('app').controller('chartController', function($scope, chartServic
     var chart_data = chartService.getChartData($scope.params)
 
     //set data to be plotted on the chart
-    $scope.data = chart_data.data
-    $scope.labels = chart_data.labels
+    $scope.series.pop();
+    $scope.series.push($scope.params.state.toUpperCase());
+
+    $scope.data.pop();
+    $scope.data.push(chart_data.data);
+
+    $scope.labels = chart_data.labels;
   }
 
-})
+});

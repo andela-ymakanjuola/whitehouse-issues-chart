@@ -7,11 +7,11 @@ angular.module('app').factory('chartService', function($http) {
       issue_dates.push(moment(issue['updated_at']).format('MMM YYYY'))
     })
 
-    return issue_dates
+    return issue_dates;
   }
 
   function getNumberOfIssuesPerMonth(issues) {
-    var issues_per_date = {}
+    var issues_per_date = {};
     issues.forEach(function(issue) {
       if(issue in issues_per_date) {
         issues_per_date[issue] += 1;
@@ -20,7 +20,7 @@ angular.module('app').factory('chartService', function($http) {
       }
     })
 
-    return issues_per_date
+    return issues_per_date;
   }
 
   function hasCachedData(params) {
@@ -35,7 +35,7 @@ angular.module('app').factory('chartService', function($http) {
 
   return {
     getIssues: function(params) {
-      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params})
+      return $http.get('https://api.github.com/repos/WhiteHouse/petitions/issues', {params: params});
     },
     getIssueLabels: function(params) {
       var labels = [];
@@ -85,4 +85,4 @@ angular.module('app').factory('chartService', function($http) {
     }
   }
 
-})
+});
