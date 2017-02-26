@@ -6,8 +6,7 @@ angular.module('app').controller('chartController', function($scope, chartServic
   //set default chart options
   $scope.options = {
     legend: {
-      display: true,
-      labelString: 'all'
+      display: true
     },
     elements: {
       line: {
