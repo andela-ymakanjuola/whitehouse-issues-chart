@@ -1,5 +1,9 @@
 angular.module('app').factory('chartService', function($http) {
-  var issues_cache = {};
+  var issues_cache = {
+    'all': {},
+    'open': {},
+    'closed': {}
+  };
 
   function getIssuesDates(issues) {
     var issue_dates = [];
@@ -19,17 +23,18 @@ angular.module('app').factory('chartService', function($http) {
         issues_per_date[issue] = 1;
       }
     })
-
     return issues_per_date;
   }
 
   function hasCachedData(params) {
-    if(params.since in issues_cache){
-      if (issues_cache[params.since].params.label == params.label && issues_cache[params.since].params.state == params.state) {
-        return true
-      }
-    } else {
-      return false
+    return (issues_cache[params.state][params.since] && params.labels === issues_cache[params.state][params.since].issue_label);
+  }
+
+  function cacheChartData(params, data, labels) {
+    issues_cache[params.state][params.since] = {
+      issue_label: params.labels,
+      data: data,
+      labels: labels
     }
   }
 
@@ -50,39 +55,31 @@ angular.module('app').factory('chartService', function($http) {
       return labels;
     },
     getCachedChartData: function(params) {
-      return issues_cache[params.since]
+      return issues_cache[params.state][params.since];
     },
     getChartData: function(params) {
       var data = [];
       var labels = [];
 
       if(hasCachedData(params)) {
-        var cachedData = this.getCachedChartData(params)
-        console.log('getting cached data', cachedData);
-        return {data: cachedData.data, labels: cachedData.labels}
+        var cached_data = this.getCachedChartData(params)
+        return {data: cached_data.data, labels: cached_data.labels}
       } else {
-        console.log('fetching from api..')
         this.getIssues(params).then(function(res) {
-          var issues = getIssuesDates(res.data)
-          var issues_per_month = getNumberOfIssuesPerMonth(issues)
+          var issues_per_month = getNumberOfIssuesPerMonth(getIssuesDates(res.data));
 
           angular.forEach(issues_per_month, function(value, key) {
             data.push(value);
             labels.push(new Date(key));
-          })
-          issues_cache[params.since] = {
-            params: params,
-            data: data,
-            labels: labels
-          }
+          });
+
+          cacheChartData(params, data, labels)
+
         }).catch(function(error) {
           console.error('error getting data', error);
-        })
-      
+        });
         return {data: data, labels: labels}
       }
-
     }
   }
-
 });
